@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <!--  <app-header v-bind:프롭스 속성 이름 ="상위 컴포넌트의 데이터"></app-header>-->
+  <app-header v-bind:hiprops="message"></app-header>
+  <app-content v-bind:numprops="number"></app-content>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  const appHeader = {
+    template: '<h1>{{hiprops}}</h1>',
+    props: ['hiprops']
+  };
+
+  const appContent = {
+    template: '<div>{{numprops}}</div>',
+    props: ['numprops']
+  };
+
+  new Vue({
+    el: '#app',
+    components: {
+      'app-header': appHeader,
+      'app-content': appContent
+    },
+    data: {
+      message: "hello",
+      number: 10
+    }
+  })
+</script>
+</body>
+</html>
