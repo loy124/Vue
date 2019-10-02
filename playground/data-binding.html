@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+        name="viewport">
+  <meta content="ie=edge" http-equiv="X-UA-Compatible">
+  <title>Document</title>
+</head>
+<body>
+<div id="app">
+  <p v-bind:id="uuid"> {{num}} </p>
+  <p id="abc1234"> {{num}} </p>
+  <p v-bind:class="name">hello</p>
+  <p> {{ doubleNum }} </p>
+  <div v-if="loading">
+    Loading...
+  </div>
+  <div v-else>
+    test user has been logged in
+  </div>
+  <div v-show="loading">
+    Loading
+  </div>
+  <!--  TODO 인풋 박스를 만들고 입력된 값을 p 태그에 출력해보세요-->
+  <input v-model="message" placeholder="여기를 수정해 보세요"/>
+  <p>  {{ message }}  </p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: {
+      num: 10,
+      uuid: 'abc1234',
+      name: 'text-blue',
+      loading: true,
+      message: ''
+    },
+    computed: {
+      doubleNum: function () {
+        return this.num * 2
+      }
+    }
+
+  })
+</script>
+</body>
+</html>

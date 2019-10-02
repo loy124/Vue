@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="TerminalProjectOptionsProvider">
+    <envs>
+      <env key="HOMEPATH" value="\Users\dhsdb" />
+      <env key="APPDATA" value="C:\Users\dhsdb\AppData\Roaming" />
+      <env key="IDEA_INITIAL_DIRECTORY" value="C:\Program Files\JetBrains\WebStorm 2019.2.1\jbr\bin" />
+      <env key="IntelliJ IDEA" value="C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.1\bin;" />
+      <env key="PATHEXT" value=".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC" />
+      <env key="Path" value="C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\dhsdb\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\dhsdb\AppData\Local\Programs\Python\Python37-32;C:\Program Files\MongoDB\Server\4.0\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\Program Files\Java\jdk1.8.0_221\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Users\dhsdb\IdeaProjects;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\dhsdb\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\dhsdb\AppData\Local\Programs\Python\Python37-32\Scripts;C:\Users\dhsdb\AppData\Local\Programs\Python\Python37-32;;C:\Users\dhsdb\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA 2019.2.1\bin;;C:\Program Files\JetBrains\WebStorm 2019.2.1\bin;;C:\Program Files\JetBrains\PyCharm 2019.2.2\bin;" />
+      <env key="WebStorm" value="C:\Program Files\JetBrains\WebStorm 2019.2.1\bin;" />
+      <env key="nodejs" value="C:\Program Files\nodejs" />
+    </envs>
+  </component>
+</project>
