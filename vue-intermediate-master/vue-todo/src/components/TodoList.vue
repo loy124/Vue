@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow">
+      <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
         <i
           class="checkBtn fas fa-check"
           v-bind:class="{checkBtnCompleted : todoItem.completed}"
@@ -19,37 +19,36 @@
 
 <script>
 export default {
-  data: function() {
-    return {
-      todoItems: []
-    };
-  },
-  created: function() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          // console.log(localStorage.getItem(localStorage.key(i)));
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //오브젝트 변환
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-        // console.log(localStorage.key(i));
-      }
-    }
-  },
+  // data: function() {
+  //   return {
+  //     todoItems: []
+  //   };
+  // },
+  // created: function() {
+  //   if (localStorage.length > 0) {
+  //     for (let i = 0; i < localStorage.length; i++) {
+  //       if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
+  //         // console.log(localStorage.getItem(localStorage.key(i)));
+  //         // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //오브젝트 변환
+  //         this.todoItems.push(
+  //           JSON.parse(localStorage.getItem(localStorage.key(i)))
+  //         );
+  //       }
+  //       // console.log(localStorage.key(i));
+  //     }
+  //   }
+  // },
+  props: ["propsdata"],
   methods: {
     removeTodo: function(todoItem, index) {
       // console.log("remove items");
       // console.log(todoItem, index);
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1); //새로운 배열 반환
+      this.$emit("removeItem", todoItem, index);
+      //새로운 배열 반환
     },
     toggleComplete: function(todoItem, index) {
-      todoItem.completed = !todoItem.completed;
-      // 로컬스토리지 갱신
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+      this.$emit("toggle", todoItem, index);
+
       // console.log(todoItem);
     }
   }
