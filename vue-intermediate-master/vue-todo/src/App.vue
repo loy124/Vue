@@ -18,23 +18,23 @@ import TodoList from "./components/TodoList";
 import TodoFooter from "./components/TodoFooter";
 
 export default {
-  data: function() {
+  data() {
     return {
       todoItems: []
     };
   },
   methods: {
-    addOneItem: function(todoItem) {
-      let obj = { completed: false, item: todoItem };
+    addOneItem(todoItem) {
+      const obj = { completed: false, item: todoItem };
       localStorage.setItem(todoItem, JSON.stringify(obj));
       this.todoItems.push(obj);
     },
-    removeOneItem: function(todoItem, index) {
+    removeOneItem(todoItem, index) {
       console.log(todoItem);
       localStorage.removeItem(todoItem.item);
       this.todoItems.splice(index, 1);
     },
-    toggleOneItem: function(todoItem, index) {
+    toggleOneItem(todoItem, index) {
       // todoItem.completed = !todoItem.completed;
       //컴포넌트 간 경계 명확화
       this.todoItems[index].completed = !this.todoItems[index].completed;
@@ -42,12 +42,12 @@ export default {
       localStorage.removeItem(todoItem.item);
       localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
     },
-    removeAllItem: function() {
+    removeAllItem() {
       localStorage.clear();
       this.todoItems = []; //빈배열로 만들기
     }
   },
-  created: function() {
+  created() {
     if (localStorage.length > 0) {
       for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i) !== "loglevel:webpack-dev-server") {

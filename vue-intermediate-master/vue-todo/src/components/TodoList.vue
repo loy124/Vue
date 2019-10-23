@@ -40,13 +40,13 @@ export default {
   // },
   props: ["propsdata"],
   methods: {
-    removeTodo: function(todoItem, index) {
+    removeTodo(todoItem, index) {
       // console.log("remove items");
       // console.log(todoItem, index);
       this.$emit("removeItem", todoItem, index);
       //새로운 배열 반환
     },
-    toggleComplete: function(todoItem, index) {
+    toggleComplete(todoItem, index) {
       this.$emit("toggle", todoItem, index);
 
       // console.log(todoItem);
