@@ -9,7 +9,8 @@ export default {
   methods: {
     clearTodo() {
       // localStorage.clear();
-      this.$emit("removeAll");
+      // this.$emit("removeAll");
+      this.$store.commit("removeAllItem");
     }
   }
 };

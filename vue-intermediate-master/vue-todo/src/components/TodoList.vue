@@ -1,7 +1,11 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow">
+      <li
+        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-bind:key="todoItem.item"
+        class="shadow"
+      >
         <i
           class="checkBtn fas fa-check"
           v-bind:class="{checkBtnCompleted : todoItem.completed}"
@@ -19,36 +23,14 @@
 
 <script>
 export default {
-  // data: function() {
-  //   return {
-  //     todoItems: []
-  //   };
-  // },
-  // created: function() {
-  //   if (localStorage.length > 0) {
-  //     for (let i = 0; i < localStorage.length; i++) {
-  //       if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-  //         // console.log(localStorage.getItem(localStorage.key(i)));
-  //         // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //오브젝트 변환
-  //         this.todoItems.push(
-  //           JSON.parse(localStorage.getItem(localStorage.key(i)))
-  //         );
-  //       }
-  //       // console.log(localStorage.key(i));
-  //     }
-  //   }
-  // },
-  props: ["propsdata"],
   methods: {
     removeTodo(todoItem, index) {
-      // console.log("remove items");
-      // console.log(todoItem, index);
-      this.$emit("removeItem", todoItem, index);
+      this.$store.commit("removeOneItem", { todoItem, index });
       //새로운 배열 반환
     },
     toggleComplete(todoItem, index) {
-      this.$emit("toggle", todoItem, index);
-
+      // this.$emit("toggle", todoItem, index);
+      this.$store.commit("toggleOneItem", { todoItem, index });
       // console.log(todoItem);
     }
   }

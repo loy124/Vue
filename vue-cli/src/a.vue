@@ -10,7 +10,7 @@
   }  
 } -->
   <!-- HTML -->
-  <div>header</div>
+  <div>{{this.$store.state.headerTe}}</div>
 </template>
 
 <script>

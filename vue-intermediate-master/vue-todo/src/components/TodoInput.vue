@@ -34,7 +34,9 @@ export default {
     addTodo() {
       if (this.newTodoItem !== "") {
         // this.$emit('이벤트이름', 인자1, 인자2...)
-        this.$emit("addTodoItem", this.newTodoItem);
+        // this.$emit("addTodoItem", this.newTodoItem);
+        // const text = this.newTodoItem.trim(); //공백제거
+        this.$store.commit("addOneItem", this.newTodoItem);
         // localStorage.setItem(this.newTodoItem, obj);
         this.clearInput();
       } else {
@@ -46,7 +48,7 @@ export default {
     }
   },
   components: {
-    Modal: Modal
+    Modal
   }
 };
 </script>

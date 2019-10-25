@@ -1,12 +1,8 @@
 <template>
   <div id="app">
     <TodoHeader></TodoHeader>
-    <TodoInput v-on:addTodoItem="addOneItem"></TodoInput>
-    <TodoList
-      v-bind:propsdata="todoItems"
-      v-on:removeItem="removeOneItem"
-      v:on:toggle="toggleOneItem"
-    ></TodoList>
+    <TodoInput></TodoInput>
+    <TodoList></TodoList>
     <TodoFooter v-on:removeAll="removeAllItem"></TodoFooter>
   </div>
 </template>
@@ -24,48 +20,30 @@ export default {
     };
   },
   methods: {
-    addOneItem(todoItem) {
-      const obj = { completed: false, item: todoItem };
-      localStorage.setItem(todoItem, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
-    removeOneItem(todoItem, index) {
-      console.log(todoItem);
-      localStorage.removeItem(todoItem.item);
-      this.todoItems.splice(index, 1);
-    },
-    toggleOneItem(todoItem, index) {
-      // todoItem.completed = !todoItem.completed;
-      //컴포넌트 간 경계 명확화
-      this.todoItems[index].completed = !this.todoItems[index].completed;
-      // 로컬스토리지 갱신
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
-    },
+    // removeOneItem(todoItem, index) {
+    //   console.log(todoItem);
+    //   localStorage.removeItem(todoItem.item);
+    //   this.todoItems.splice(index, 1);
+    // },
+    // toggleOneItem(todoItem, index) {
+    //   // todoItem.completed = !todoItem.completed;
+    //   //컴포넌트 간 경계 명확화
+    //   this.todoItems[index].completed = !this.todoItems[index].completed;
+    //   // 로컬스토리지 갱신
+    //   localStorage.removeItem(todoItem.item);
+    //   localStorage.setItem(todoItem.item, JSON.stringify(todoItem));
+    // },
     removeAllItem() {
       localStorage.clear();
       this.todoItems = []; //빈배열로 만들기
     }
   },
-  created() {
-    if (localStorage.length > 0) {
-      for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i) !== "loglevel:webpack-dev-server") {
-          // console.log(localStorage.getItem(localStorage.key(i)));
-          // console.log(JSON.parse(localStorage.getItem(localStorage.key(i)))); //오브젝트 변환
-          this.todoItems.push(
-            JSON.parse(localStorage.getItem(localStorage.key(i)))
-          );
-        }
-        // console.log(localStorage.key(i));
-      }
-    }
-  },
+
   components: {
-    TodoHeader: TodoHeader,
-    TodoInput: TodoInput,
-    TodoList: TodoList,
-    TodoFooter: TodoFooter
+    TodoHeader,
+    TodoInput,
+    TodoList,
+    TodoFooter
   }
 };
 </script>
