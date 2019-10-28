@@ -2,17 +2,17 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.$store.state.todoItems"
+        v-for="(todoItem, index) in this.storedTodoItems"
         v-bind:key="todoItem.item"
         class="shadow"
       >
         <i
           class="checkBtn fas fa-check"
           v-bind:class="{checkBtnCompleted : todoItem.completed}"
-          v-on:click="toggleComplete(todoItem, index)"
+          v-on:click="toggleComplete({todoItem, index})"
         ></i>
         <span v-bind:class="{textCompleted : todoItem.completed}">{{ todoItem.item }}</span>
-        <span class="removeBtn" v-on:click="removeTodo(todoItem, index)">
+        <span class="removeBtn" v-on:click="removeTodo({todoItem, index})">
           <i class="fas fa-trash-alt"></i>
         </span>
       </li>
@@ -22,17 +22,36 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      this.$store.commit("removeOneItem", { todoItem, index });
-      //새로운 배열 반환
-    },
-    toggleComplete(todoItem, index) {
-      // this.$emit("toggle", todoItem, index);
-      this.$store.commit("toggleOneItem", { todoItem, index });
-      // console.log(todoItem);
-    }
+    //인자가 자동으로 넘어간다
+    ...mapMutations({
+      removeTodo: "removeOneItem"
+    }),
+    ...mapMutations({
+      toggleComplete: "toggleOneItem"
+    })
+    // removeTodo(todoItem, index) {
+    //   this.$store.commit("removeOneItem", { todoItem, index });
+    //   //새로운 배열 반환
+    // },
+    // toggleComplete(todoItem, index) {
+    //   // this.$emit("toggle", todoItem, index);
+    //   this.$store.commit("toggleOneItem", { todoItem, index });
+    //   // console.log(todoItem);
+    // }
+  },
+  computed: {
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // },
+    ...mapGetters(["storedTodoItems"])
+    //위 선언내용과 다를때 객체 리터럴 방식 사용
+    // ...mapGetters({
+    //   todoItems: "storedTodoItems"
+    // })
   }
 };
 </script>
