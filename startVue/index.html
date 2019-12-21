@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <!-- 기본 메세지 출력 -->
+    <div id="app">{{ message }}</div>
+    <!-- 동적 바인딩(마우스를 가져다 대면 표시된다, v-bind:title title에 바인딩하기)-->
+    <div id="app-2">
+      <span v-bind:title="message">
+        마우스를 올리면 동적으로 바인딩 된 title을 볼 수 있습니다.
+      </span>
+    </div>
+
+    <!-- 화면 가리고 보이게 하기(v- if 조건문 활용하기)  -->
+    <div id="app-3">
+      <p v-if='seen'>이제 나를 볼 수 있게 될 거야</p>
+    </div>
+
+    <!-- 화면에 뿌려주기(v-for 반복문) -->
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{todo.text}}
+        </li>
+      </ol>
+    </div>
+
+    <!-- 버튼 클릭 이벤트(v-on 이벤트리스너) -->
+    <div id="app-5">
+      <p>{{message1}}</p>
+      <button v-on:click="reverseMessage">메세지 뒤집기</button>
+    </div>
+
+    <!-- 사용자 입력 핸들링(v-model input 상태 관리) -->
+    <div id="app-6">
+      <p>{{message2}}</p>
+      <input v-model="message2" type="text">
+    </div>
+
+  </div>
+
+  <!-- 상용버전, 속도와 용량이 최적화됨. -->
+  <!-- 뷰를 사용하기위한 cdn 주소 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: "안녕하세요 Vue"
+      }
+
+    });
+    var app2 = new Vue({
+      el: '#app-2',
+      data: {
+        message: '이 페이지는 ' + new Date() + '에 로드되었습니다.'
+      }
+    });
+
+    var app3 = new Vue({
+      el: '#app-3',
+      //false로 지정할 시에 보이지않는다
+      data: {
+        seen: false
+      }
+    });
+
+    var app4 = new Vue({
+      el: '#app-4',
+      data: {
+        todos: [{
+            text: 'javascript 배우기 '
+          },
+          {
+            text: 'Vue 배우기 '
+          },
+          {
+            text: '투두 리스트 작성하기'
+          }
+        ]
+      }
+    });
+
+    // 문자열 반대로 뒤집기
+    //var name = "간장공장공장장";
+    //var nameReverse = name.split("").reverse().join(""); 
+    //장장공장공장간
+
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        message1: 'hello! Vue World!!'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message1 = this.message1.split('').reverse().join('')
+        }
+      }
+    });
+
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message2: '반갑 Vue'
+      }
+    });
+  </script>
+</body>
+
+</html>
