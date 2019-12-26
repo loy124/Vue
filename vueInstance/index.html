@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{ foo }}</p>
+    <!-- obj.foo는 더이상 변하지 않습니다. -->
+    <button v-on:click='foo = "bas"'>Change It</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script>
+    var obj = {
+      foo: 'bar'
+    }
+    //변경이 되지 못하게 막는다
+    // Object.freeze(obj); 
+
+    new Vue({
+      el: '#app',
+      data: obj,
+      created: function () {
+        console.log("이것은 생성자느낌의 created 입니다.")
+      }
+    });
+  </script>
+</body>
+
+</html>
