@@ -4,13 +4,7 @@
     <!-- <form v-on:submit="onSubmitForm"> -->
     <!-- v-on:submit + e.preventDefault() -->
     <form @submit.prevent="onSubmitForm">
-      <input
-        ref="answer"
-        type="text"
-        minlength="4"
-        maxlength="4"
-        v-model="value"
-      />
+      <input ref="answer" type="text" minlength="4" maxlength="4" v-model="value" />
       <button type="submit">입력</button>
     </form>
     <div>시도: {{ tries.length }}</div>
@@ -40,9 +34,9 @@ export default {
     return {
       answer: getNumbers(), // ex) [1, 5, 3, 4]
       tries: [],
-      value: '',
-      result: '',
-      id: '',
+      value: "",
+      result: "",
+      id: ""
     };
   },
   methods: {
@@ -52,24 +46,34 @@ export default {
       //인풋값과 배열을 합친 ex)1234 가 같을때
       //정답일때
 
-      if (this.value === this.answer.join('')) {
+      if (this.value === this.answer.join("")) {
         this.tries.push({
           try: this.value,
-          result: '홈런',
-          id: this.id++,
+          result: "홈런",
+          id: this.id++
         });
-        this.result = '홈런';
-        alert('게임을 다시 실행합니다');
-        this.answer = getNumbers();
-        this.value = '';
-        this.tries = [];
+        this.result = "홈런";
+        alert("게임을 다시 실행합니다");
+        this.answer = getNumbers(); //새 정답 배열 생성
+        this.tries = []; //시도수
+        this.value = ""; // 입력값
         this.$refs.answer.focus();
       } else {
+        //정답 틀렷을때
+        if (this.tries.length >= 9) {
+          this.result = `10번 넘게 틀려서 실패!! 
+          답은 ${this.answer.join(", ")}였습니다`;
+          alert("게임을 다시 실행합니다");
+          this.answer = getNumbers();
+          this.value = "";
+          this.tries = [];
+          this.$refs.answer.focus();
+        }
         // 같은 변수라도 화면에 보여지면 데이터에 넣고
         // 아닐경우 데이터에 넣지 않고 그냥 활용한다.
         let ball = 0;
         let strike = 0;
-        const answerArray = this.value.split('').map(v => parseInt(v));
+        const answerArray = this.value.split("").map(v => parseInt(v));
         // const rightAnswerArray = this.answer.split('').map(v => parseInt(v));
         for (let i = 0; i < 4; i++) {
           if (answerArray[i] === this.answer[i]) {
@@ -80,14 +84,19 @@ export default {
             ball++;
           }
         }
-        console.log(strike, ball);
+        this.tries.push({
+          try: this.value,
+          result: `${strike} 스트라이크, ${ball} 볼입니다`,
+          id: this.id++
+        });
+        // console.log(strike, ball);
+        this.value = "";
+        this.$refs.answer.focus();
       }
 
-      console.log(this.id);
-      this.value = '';
-      this.$refs.answer.focus();
-    },
-  },
+      // console.log(this.id);
+    }
+  }
 };
 </script>
 
