@@ -33,17 +33,29 @@ const scores = {
   보: -1
 };
 
-console.log(Object.entries(rspCoords));
+//console.log(Object.entries(rspCoords));
 const computerChoice = imgCoord => {
   //객체가 가지고있는 모든프로퍼티를 키와 쌍 값으로 배열 형태로 반환해준다.
-
+  //객체를 2차원 배열로 변경해준다
+  //[["바위", 0], ["가위", "-142px"], ["보", "-284px"]]
+  //따라서 v[1] = 배열안의 value값을 뜻한다
+  //value값이 imgCoord(0, -142등이 같은 것을 find로 찾아서 return 해준다)
+  // 해당 배열을 리턴해준것은 ["바위", 0] 이런식으로 리턴되기때문에 해당값의 [0] 첫번째 값을 리턴 해준다
+  // 즉 v[1] === 0 일때는 ["바위", 0] 을 리턴해주는데  ["바위", 0] 의 [0]번째 값이니 바위를 리턴해준다
   return Object.entries(rspCoords).find(function(v) {
-    console.log("v[1]" + v[1]);
     return v[1] === imgCoord;
   })[0];
 };
 
+// console.log("엔트리: " + Object.entries(rspCoords));
+// console.log("엔트리: " + Object.entries(rspCoords)[0][0]);
+// console.log("엔트리: " + Object.entries(rspCoords)[1][0]);
+// console.log("엔트리: " + Object.entries(rspCoords)[2][0]);
+
 Object.entries(rspCoords).find(function(v) {
+  console.log("v" + v);
+
+  console.log("v[0]" + v[0]);
   console.log("v[1]" + v[1]);
 });
 
@@ -66,6 +78,17 @@ export default {
     }
   },
   methods: {
+    changeHand() {
+      interval = setInterval(() => {
+        if (this.imgCoord === rspCoords.바위) {
+          this.imgCoord = rspCoords.가위;
+        } else if (this.imgCoord === rspCoords.가위) {
+          this.imgCoord = rspCoords.보;
+        } else if (this.imgCoord === rspCoords.보) {
+          this.imgCoord = rspCoords.바위;
+        }
+      }, 100);
+    },
     onClickButton(choice) {
       clearInterval(interval);
       const myScore = scores[choice];
@@ -76,7 +99,14 @@ export default {
       } else if ([-1, 2].includes(diff)) {
         this.result = "이겼습니다";
         this.score += 1;
+      } else {
+        this.result = "졌습니다ㅠㅠ";
+        this.score -= 1;
       }
+
+      setTimeout(() => {
+        this.changeHand();
+      }, 1000);
     }
   },
   //생성되기 전
@@ -94,27 +124,19 @@ export default {
   //화면에 그릴떄 mounted
   mounted() {
     console.log("mounted");
-    interval = setInterval(() => {
-      if (this.imgCoord === rspCoords.바위) {
-        this.imgCoord = rspCoords.가위;
-      } else if (this.imgCoord === rspCoords.가위) {
-        this.imgCoord = rspCoords.보;
-      } else if (this.imgCoord === rspCoords.보) {
-        this.imgCoord = rspCoords.바위;
-      }
-    }, 100);
+    this.changeHand();
   },
   //업데이트되기 전
   beforeUpdate() {
-    console.log("before update");
+    //  console.log("before update");
   },
   //화면이 바뀔때
   updated() {
-    console.log("updated");
+    //   console.log("updated");
   },
   //화면에서 사라지기 전
   beforeDestroy() {
-    console.log("before destory");
+    //  console.log("before destory");
     //컴포넌트가 사라져도 interval은 계속해서 돌기때문에 clearInterval
     clearInterval(interval);
   },
