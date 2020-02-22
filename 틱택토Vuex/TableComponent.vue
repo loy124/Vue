@@ -1,35 +1,14 @@
 <template>
   <table>
-    <tr-component
-      v-for="(rowData, index) in tableData"
-      :key="index"
-      :row-index="index"
-    ></tr-component>
+    <slot>
+      <!-- 테이블 컴포넌트에 아무값도 안들어갔으면 슬롯 안에있는 기본값이 들어간다 -->
+      <tr>
+        <td></td>
+      </tr>
+    </slot>
   </table>
 </template>
 
 <script>
-import TrComponent from './TrComponent';
-export default {
-  components: {
-    TrComponent,
-  },
-  computed: {
-    tableData() {
-      return this.$store.state.tableData;
-    },
-  },
-};
+export default {};
 </script>
-
-<style>
-table {
-  border-collapse: collapse;
-}
-td {
-  border: 1px solid black;
-  width: 40px;
-  height: 40px;
-  text-align: center;
-}
-</style>

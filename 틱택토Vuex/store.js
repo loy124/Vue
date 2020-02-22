@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 Vue.use(Vuex);
+//Vue.use 를 사용할때마다 $axios등 기능들이 추가되는 방식
 //mutation의 이름들을 변수로 빼고 export 한다
 //오타확률을 줄이기위해 이렇게 변수로 빼둔것
 export const SET_WINNER = 'SET_WINNER';
@@ -22,7 +23,12 @@ export default new Vuex.Store({
         turn: 'O',
         winner: '',
     }, //vue의 data와 유사
-    getters: {}, // vue의 computed와 유사
+    getters: {
+        // vue의 computed와 유사
+        turnMessage(state) {
+            return state.turn + '님이 승리하셨습니다.';
+        },
+    },
     mutations: {
         //대문자로 정하는게 Vue 커뮤니티의 규칙
         [SET_WINNER](state, winner) {
